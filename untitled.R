@@ -8,7 +8,8 @@ library(survminer)
 library(ggplot2)
 library(dplyr)
 
-setwd("/Users/antoinegaudetchardonnet/Documents/Sara/R")
+setwd("/Users/antoinegaudetchardonnet/Git/Sara")
+
 base <- read.csv2("Base3.csv")
 
 base1 <- base[base$Site == "1",]
@@ -17,7 +18,7 @@ base0 <- base[base$Site == "0",]
 base$grpASA <- cut(base$ASA, c(1, 2, 4), right = FALSE, include.lowest = TRUE)
 
 
-sink ("/Users/antoinegaudetchardonnet/Documents/Sara/R/popu2.csv", append = F)
+# sink ("/Users/antoinegaudetchardonnet/Documents/Sara/R/popu2.csv", append = F)
 
 fitAGE <- aov(Age ~ Site, base)
 summary (fitAGE)
@@ -233,7 +234,7 @@ mean(base3$Rankin, na.rm = TRUE) + 1.96*sd(base3$Rankin, na.rm = TRUE)/sqrt(leng
 )
 RankinG
 
-sink()
+# sink()
 
 
 
@@ -242,332 +243,539 @@ sink()
 
 
 
-sink ("/Users/antoinegaudetchardonnet/Documents/Sara/R/popu.csv", append = F)
-
+sink ("/Users/antoinegaudetchardonnet/Git/Sara/popu.csv", append = F)
 
 tabgrpASA <- table(base$grpASA, base$Site)
 tabgrpASA
-chisq.test(tabgrpASA)
+test <- chisq.test(tabgrpASA)
+grpASA <- cbind (tabgrpASA, test$p.value)
+print("grpASA")
+write.csv (grpASA)
 
 # Tests popu #
 
 tabASA <- table(base$ASA, base$Site)
 tabASA
-chisq.test(tabASA)
-# chisq.residuals(tabASA)
+test <- chisq.test(tabASA)
+ASA <- cbind (tabASA, test$p.value)
+print("ASA")
+write.csv (ASA)
+# test <- chisq.residuals(tabASA)
 
 
 tabSexe.M..1 <- table(base$Sexe.M..1, base$Site)
 tabSexe.M..1
-chisq.test(tabSexe.M..1)
-# chisq.residuals(tabSexe.M..1)
+test <- chisq.test(tabSexe.M..1)
+Sexe.M..1 <- cbind (tabSexe.M..1, test$p.value)
+print("Sexe.M..1")
+write.csv (Sexe.M..1)
+# test <- chisq.residuals(tabSexe.M..1)
 
 tabAutonomie <- table(base$Autonomie, base$Site)
 tabAutonomie
-chisq.test(tabAutonomie)
-# chisq.residuals(tabAutonomie)
+test <- chisq.test(tabAutonomie)
+Autonomie <- cbind (tabAutonomie, test$p.value)
+print("Autonomie")
+write.csv (Autonomie)
+# test <- chisq.residuals(tabAutonomie)
 
 tabATCDPneumo <- table(base$ATCDPneumo, base$Site)
 tabATCDPneumo
-chisq.test(tabATCDPneumo)
-# chisq.residuals(tabATCDPneumo)
+test <- chisq.test(tabATCDPneumo)
+ATCDPneumo <- cbind (tabATCDPneumo, test$p.value)
+print("ATCDPneumo")
+write.csv (ATCDPneumo)
+# test <- chisq.residuals(tabATCDPneumo)
 
 tabATCDIS <- table(base$ATCDIS, base$Site)
 tabATCDIS
-chisq.test(tabATCDIS)
-# chisq.residuals(tabATCDIS)
+test <- chisq.test(tabATCDIS)
+ATCDIS <- cbind (tabATCDIS, test$p.value)
+print("ATCDIS")
+write.csv (ATCDIS)
+# test <- chisq.residuals(tabATCDIS)
 
 tabIPP <- table(base$IPP, base$Site)
 tabIPP
-chisq.test(tabIPP)
-# chisq.residuals(tabIPP)
+test <- chisq.test(tabIPP)
+IPP <- cbind (tabIPP, test$p.value)
+print("IPP")
+write.csv (IPP)
+# test <- chisq.residuals(tabIPP)
 
 tabATB <- table(base$ATB, base$Site)
 tabATB
-chisq.test(tabATB)
-# chisq.residuals(tabATB)
+test <- chisq.test(tabATB)
+ATB <- cbind (tabATB, test$p.value)
+print("ATB")
+write.csv (ATB)
+# test <- chisq.residuals(tabATB)
 
 tabHospit <- table(base$Hospit, base$Site)
 tabHospit
-chisq.test(tabHospit)
-# chisq.residuals(tabHospit)
+test <- chisq.test(tabHospit)
+Hospit <- cbind (tabHospit, test$p.value)
+print("Hospit")
+write.csv (Hospit)
+# test <- chisq.residuals(tabHospit)
 
 tabColoGerme <- table(base$ColoGerme, base$Site)
 tabColoGerme
-chisq.test(tabColoGerme)
-# chisq.residuals(tabColoGerme)
+test <- chisq.test(tabColoGerme)
+ColoGerme <- cbind (tabColoGerme, test$p.value)
+print("ColoGerme")
+write.csv (ColoGerme)
+# test <- chisq.residuals(tabColoGerme)
 
 tabColoAdAc <- table(base$ColoAdAc, base$Site)
 tabColoAdAc
-chisq.test(tabColoAdAc)
-# chisq.residuals(tabColoAdAc)
+test <- chisq.test(tabColoAdAc)
+ColoAdAc <- cbind (tabColoAdAc, test$p.value)
+print("ColoAdAc")
+write.csv (ColoAdAc)
+# test <- chisq.residuals(tabColoAdAc)
 
 tabGlasgow <- table(base$Glasgow, base$Site)
 tabGlasgow
-chisq.test(tabGlasgow)
-# chisq.residuals(tabGlasgow)
+test <- chisq.test(tabGlasgow)
+Glasgow <- cbind (tabGlasgow, test$p.value)
+print("Glasgow")
+write.csv (Glasgow)
+# test <- chisq.residuals(tabGlasgow)
 
 tabIGS2 <- table(base$IGS2, base$Site)
 tabIGS2
-chisq.test(tabIGS2)
-# chisq.residuals(tabIGS2)
+test <- chisq.test(tabIGS2)
+IGS2 <- cbind (tabIGS2, test$p.value)
+print("IGS2")
+write.csv (IGS2)
+# test <- chisq.residuals(tabIGS2)
 
 tabDefaillance.HD <- table(base$Defaillance.HD, base$Site)
 tabDefaillance.HD
-chisq.test(tabDefaillance.HD)
-# chisq.residuals(tabDefaillance.HD)
+test <- chisq.test(tabDefaillance.HD)
+Defaillance.HD <- cbind (tabDefaillance.HD, test$p.value)
+print("Defaillance.HD")
+write.csv (Defaillance.HD)
+# test <- chisq.residuals(tabDefaillance.HD)
 
 tabDefaillance.Respi <- table(base$Defaillance.Respi, base$Site)
 tabDefaillance.Respi
-chisq.test(tabDefaillance.Respi)
-# chisq.residuals(tabDefaillance.Respi)
+test <- chisq.test(tabDefaillance.Respi)
+Defaillance.Respi <- cbind (tabDefaillance.Respi, test$p.value)
+print("Defaillance.Respi")
+write.csv (Defaillance.Respi)
+# test <- chisq.residuals(tabDefaillance.Respi)
 
 tabAtteinte.Ortho <- table(base$Atteinte.Ortho, base$Site)
 tabAtteinte.Ortho
-chisq.test(tabAtteinte.Ortho)
-# chisq.residuals(tabAtteinte.Ortho)
+test <- chisq.test(tabAtteinte.Ortho)
+Atteinte.Ortho <- cbind (tabAtteinte.Ortho, test$p.value)
+print("Atteinte.Ortho")
+write.csv (Atteinte.Ortho)
+# test <- chisq.residuals(tabAtteinte.Ortho)
 
 tabAtteinte.Abdo <- table(base$Atteinte.Abdo, base$Site)
 tabAtteinte.Abdo
-chisq.test(tabAtteinte.Abdo)
-# chisq.residuals(tabAtteinte.Abdo)
+test <- chisq.test(tabAtteinte.Abdo)
+Atteinte.Abdo <- cbind (tabAtteinte.Abdo, test$p.value)
+print("Atteinte.Abdo")
+write.csv (Atteinte.Abdo)
+# test <- chisq.residuals(tabAtteinte.Abdo)
 
 tabAtteinte.Face <- table(base$Atteinte.Face, base$Site)
 tabAtteinte.Face
-chisq.test(tabAtteinte.Face)
-# chisq.residuals(tabAtteinte.Face)
+test <- chisq.test(tabAtteinte.Face)
+Atteinte.Face <- cbind (tabAtteinte.Face, test$p.value)
+print("Atteinte.Face")
+write.csv (Atteinte.Face)
+# test <- chisq.residuals(tabAtteinte.Face)
 
 tabAtteinte.Pneumo <- table(base$Atteinte.Pneumo, base$Site)
 tabAtteinte.Pneumo
-chisq.test(tabAtteinte.Pneumo)
-# chisq.residuals(tabAtteinte.Pneumo)
+test <- chisq.test(tabAtteinte.Pneumo)
+Atteinte.Pneumo <- cbind (tabAtteinte.Pneumo, test$p.value)
+print("Atteinte.Pneumo")
+write.csv (Atteinte.Pneumo)
+# test <- chisq.residuals(tabAtteinte.Pneumo)
 
 tabInhalation <- table(base$Inhalation, base$Site)
 tabInhalation
-chisq.test(tabInhalation)
-# chisq.residuals(tabInhalation)
+test <- chisq.test(tabInhalation)
+Inhalation <- cbind (tabInhalation, test$p.value)
+print("Inhalation")
+write.csv (Inhalation)
+# test <- chisq.residuals(tabInhalation)
 
 tabChir <- table(base$Chir, base$Site)
 tabChir
-chisq.test(tabChir)
-# chisq.residuals(tabChir)
+test <- chisq.test(tabChir)
+Chir <- cbind (tabChir, test$p.value)
+print("Chir")
+write.csv (Chir)
+# test <- chisq.residuals(tabChir)
 
 tabOsmotherapie <- table(base$Osmotherapie, base$Site)
 tabOsmotherapie
-chisq.test(tabOsmotherapie)
-# chisq.residuals(tabOsmotherapie)
+test <- chisq.test(tabOsmotherapie)
+Osmotherapie <- cbind (tabOsmotherapie, test$p.value)
+print("Osmotherapie")
+write.csv (Osmotherapie)
+# test <- chisq.residuals(tabOsmotherapie)
 
 tabCorticoides <- table(base$Corticoides, base$Site)
 tabCorticoides
-chisq.test(tabCorticoides)
-# chisq.residuals(tabCorticoides)
+test <- chisq.test(tabCorticoides)
+Corticoides <- cbind (tabCorticoides, test$p.value)
+print("Corticoides")
+write.csv (Corticoides)
+# test <- chisq.residuals(tabCorticoides)
 
 tabHypothermie <- table(base$Hypothermie, base$Site)
 tabHypothermie
-chisq.test(tabHypothermie)
-# chisq.residuals(tabHypothermie)
+test <- chisq.test(tabHypothermie)
+Hypothermie <- cbind (tabHypothermie, test$p.value)
+print("Hypothermie")
+write.csv (Hypothermie)
+# test <- chisq.residuals(tabHypothermie)
 
 tabVmjour <- table(base$Vmjour, base$Site)
 tabVmjour
-chisq.test(tabVmjour)
-# chisq.residuals(tabVmjour)
+test <- chisq.test(tabVmjour)
+Vmjour <- cbind (tabVmjour, test$p.value)
+print("Vmjour")
+write.csv (Vmjour)
+# test <- chisq.residuals(tabVmjour)
 
 tabVNI <- table(base$VNI, base$Site)
 tabVNI
-chisq.test(tabVNI)
-# chisq.residuals(tabVNI)
+test <- chisq.test(tabVNI)
+VNI <- cbind (tabVNI, test$p.value)
+print("VNI")
+write.csv (VNI)
+# test <- chisq.residuals(tabVNI)
 
 tabOptiflow <- table(base$Optiflow, base$Site)
 tabOptiflow
-chisq.test(tabOptiflow)
-# chisq.residuals(tabOptiflow)
+test <- chisq.test(tabOptiflow)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabOptiflow)
 
 tabReIOT <- table(base$ReIOT, base$Site)
 tabReIOT
-chisq.test(tabReIOT)
-# chisq.residuals(tabReIOT)
+test <- chisq.test(tabReIOT)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabReIOT)
 
 tabTracheo <- table(base$Tracheo, base$Site)
 tabTracheo
-chisq.test(tabTracheo)
-# chisq.residuals(tabTracheo)
+test <- chisq.test(tabTracheo)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTracheo)
 
 tabHTIC <- table(base$HTIC, base$Site)
 tabHTIC
-chisq.test(tabHTIC)
-# chisq.residuals(tabHTIC)
+test <- chisq.test(tabHTIC)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabHTIC)
 
 tabX2.sedations <- table(base$X2.sedations, base$Site)
 tabX2.sedations
-chisq.test(tabX2.sedations)
-# chisq.residuals(tabX2.sedations)
+test <- chisq.test(tabX2.sedations)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabX2.sedations)
 
 tabX3.sedations <- table(base$X3.sedations, base$Site)
 tabX3.sedations
-chisq.test(tabX3.sedations)
-# chisq.residuals(tabX3.sedations)
+test <- chisq.test(tabX3.sedations)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabX3.sedations)
 
 tabPenthotal <- table(base$Penthotal, base$Site)
 tabPenthotal
-chisq.test(tabPenthotal)
-# chisq.residuals(tabPenthotal)
+test <- chisq.test(tabPenthotal)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPenthotal)
 
 tabCurares <- table(base$Curares, base$Site)
 tabCurares
-chisq.test(tabCurares)
-# chisq.residuals(tabCurares)
+test <- chisq.test(tabCurares)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabCurares)
 
 tabCatecho <- table(base$Catecho, base$Site)
 tabCatecho
-chisq.test(tabCatecho)
-# chisq.residuals(tabCatecho)
+test <- chisq.test(tabCatecho)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabCatecho)
 
 tabcatechoDoseMax <- table(base$catechoDoseMax, base$Site)
 tabcatechoDoseMax
-chisq.test(tabcatechoDoseMax)
-# chisq.residuals(tabcatechoDoseMax)
+test <- chisq.test(tabcatechoDoseMax)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabcatechoDoseMax)
 
 tabCatechoDuree <- table(base$CatechoDuree, base$Site)
 tabCatechoDuree
-chisq.test(tabCatechoDuree)
-# chisq.residuals(tabCatechoDuree)
+test <- chisq.test(tabCatechoDuree)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabCatechoDuree)
 
 tabTransfusion <- table(base$Transfusion, base$Site)
 tabTransfusion
-chisq.test(tabTransfusion)
-# chisq.residuals(tabTransfusion)
+test <- chisq.test(tabTransfusion)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTransfusion)
 
 tabDuree.sejour <- table(base$Duree.sejour, base$Site)
 tabDuree.sejour
-chisq.test(tabDuree.sejour)
-# chisq.residuals(tabDuree.sejour)
+test <- chisq.test(tabDuree.sejour)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabDuree.sejour)
 
 tabDecede <- table(base$Decede, base$Site)
 tabDecede
-chisq.test(tabDecede)
-# chisq.residuals(tabDecede)
+test <- chisq.test(tabDecede)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabDecede)
 
 
 tabRankin <- table(base$Rankin, base$Site)
 tabRankin
-chisq.test(tabRankin)
-# chisq.residuals(tabRankin)
+test <- chisq.test(tabRankin)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabRankin)
 
 tabTypeHED <- table(base$TypeHED, base$Site)
 tabTypeHED
-chisq.test(tabTypeHED)
-# chisq.residuals(tabTypeHED)
+test <- chisq.test(tabTypeHED)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypeHED)
 
 tabTypeOedeme <- table(base$TypeOedeme, base$Site)
 tabTypeOedeme
-chisq.test(tabTypeOedeme)
-# chisq.residuals(tabTypeOedeme)
+test <- chisq.test(tabTypeOedeme)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypeOedeme)
 
 tabTypeHSD <- table(base$TypeHSD, base$Site)
 tabTypeHSD
-chisq.test(tabTypeHSD)
-# chisq.residuals(tabTypeHSD)
+test <- chisq.test(tabTypeHSD)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypeHSD)
 
 tabTypeHSA <- table(base$TypeHSA, base$Site)
 tabTypeHSA
-chisq.test(tabTypeHSA)
-# chisq.residuals(tabTypeHSA)
+test <- chisq.test(tabTypeHSA)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypeHSA)
 
 tabTypePetechi <- table(base$TypePetechi, base$Site)
 tabTypePetechi
-chisq.test(tabTypePetechi)
-# chisq.residuals(tabTypePetechi)
+test <- chisq.test(tabTypePetechi)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypePetechi)
 
 tabTypeHematome <- table(base$TypeHematome, base$Site)
 tabTypeHematome
-chisq.test(tabTypeHematome)
-# chisq.residuals(tabTypeHematome)
+test <- chisq.test(tabTypeHematome)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabTypeHematome)
 
 tabCatechoChoc <- table(base$CatechoChoc, base$Site)
 tabCatechoChoc
-chisq.test(tabCatechoChoc)
-# chisq.residuals(tabCatechoChoc)
+test <- chisq.test(tabCatechoChoc)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabCatechoChoc)
 
 tabCatechoPPC <- table(base$CatechoPPC, base$Site)
 tabCatechoPPC
-chisq.test(tabCatechoPPC)
-# chisq.residuals(tabCatechoPPC)
+test <- chisq.test(tabCatechoPPC)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabCatechoPPC)
 
 tabPAVM.96h.Noso <- table(base$PAVM.96h.Noso, base$Site)
 tabPAVM.96h.Noso
-chisq.test(tabPAVM.96h.Noso)
-# chisq.residuals(tabPAVM.96h.Noso)
+test <- chisq.test(tabPAVM.96h.Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM.96h.Noso)
 
 tabPAVM.96h.Comm <- table(base$PAVM.96h.Comm, base$Site)
 tabPAVM.96h.Comm
-chisq.test(tabPAVM.96h.Comm)
-# chisq.residuals(tabPAVM.96h.Comm)
+test <- chisq.test(tabPAVM.96h.Comm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM.96h.Comm)
 
 tabPAVM1.7j.Noso <- table(base$PAVM1.7j.Noso, base$Site)
 tabPAVM1.7j.Noso
-chisq.test(tabPAVM1.7j.Noso)
-# chisq.residuals(tabPAVM1.7j.Noso)
+test <- chisq.test(tabPAVM1.7j.Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM1.7j.Noso)
 
 tabPAVM1.7j.Comm <- table(base$PAVM1.7j.Comm, base$Site)
 tabPAVM1.7j.Comm
-chisq.test(tabPAVM1.7j.Comm)
-# chisq.residuals(tabPAVM1.7j.Comm)
+test <- chisq.test(tabPAVM1.7j.Comm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM1.7j.Comm)
 
 tabPAVM1.7j.Noso.1 <- table(base$PAVM1.7j.Noso.1, base$Site)
 tabPAVM1.7j.Noso.1
-chisq.test(tabPAVM1.7j.Noso.1)
-# chisq.residuals(tabPAVM1.7j.Noso.1)
+test <- chisq.test(tabPAVM1.7j.Noso.1)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM1.7j.Noso.1)
 
 tabPAVM1.j.7Comm <- table(base$PAVM1.j.7Comm, base$Site)
 tabPAVM1.j.7Comm
-chisq.test(tabPAVM1.j.7Comm)
-# chisq.residuals(tabPAVM1.j.7Comm)
+test <- chisq.test(tabPAVM1.j.7Comm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM1.j.7Comm)
 
 tabPAVM2...7j.Noso <- table(base$PAVM2...7j.Noso, base$Site)
 tabPAVM2...7j.Noso
-chisq.test(tabPAVM2...7j.Noso)
-# chisq.residuals(tabPAVM2...7j.Noso)
+test <- chisq.test(tabPAVM2...7j.Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM2...7j.Noso)
 
 tabPAVM2...7jComm <- table(base$PAVM2...7jComm, base$Site)
 tabPAVM2...7jComm
-chisq.test(tabPAVM2...7jComm)
-# chisq.residuals(tabPAVM2...7jComm)
+test <- chisq.test(tabPAVM2...7jComm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM2...7jComm)
 
 tabPAVM2.7j.Noso <- table(base$PAVM2.7j.Noso, base$Site)
 tabPAVM2.7j.Noso
-chisq.test(tabPAVM2.7j.Noso)
-# chisq.residuals(tabPAVM2.7j.Noso)
+test <- chisq.test(tabPAVM2.7j.Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM2.7j.Noso)
 
 tabPAVM2..7j.Comm <- table(base$PAVM2..7j.Comm, base$Site)
 tabPAVM2..7j.Comm
-chisq.test(tabPAVM2..7j.Comm)
-# chisq.residuals(tabPAVM2..7j.Comm)
+test <- chisq.test(tabPAVM2..7j.Comm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM2..7j.Comm)
 
 tabPAVM3Noso <- table(base$PAVM3Noso, base$Site)
 tabPAVM3Noso
-chisq.test(tabPAVM3Noso)
-# chisq.residuals(tabPAVM3Noso)
+test <- chisq.test(tabPAVM3Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM3Noso)
 
 tabPAVM3Comm <- table(base$PAVM3Comm, base$Site)
 tabPAVM3Comm
-chisq.test(tabPAVM3Comm)
-# chisq.residuals(tabPAVM3Comm)
+test <- chisq.test(tabPAVM3Comm)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM3Comm)
 
 tabPAVM4Noso <- table(base$PAVM4Noso, base$Site)
 tabPAVM4Noso
-chisq.test(tabPAVM4Noso)
-# chisq.residuals(tabPAVM4Noso)
+test <- chisq.test(tabPAVM4Noso)
+XXX <- cbind (tabXXX, test$p.value)
+print("XXX")
+write.csv (XXX)
+# test <- chisq.residuals(tabPAVM4Noso)
+
+
 
 tabPAVM4Comm <- table(base$PAVM4Comm, base$Site)
-tabPAVM4Comm
-chisq.test(tabPAVM4Comm)
+test <- chisq.test(tabPAVM4Comm)
+PAVM4Comm <- cbind (tabPAVM4Comm, test$p.value)
+print("PAVM4Comm")
+write.csv (PAVM4Comm)
 # chisq.residuals(tabPAVM4Comm)
 
+
 tabPAVM5Noso <- table(base$PAVM5Noso, base$Site)
-tabPAVM5Noso
-chisq.test(tabPAVM5Noso)
+test <- chisq.test(tabPAVM5Noso)
+PAVM5Noso <- cbind (tabPAVM5Noso, test$p.value)
+print("PAVM5Noso")
+write.csv (PAVM5Noso)
 # chisq.residuals(tabPAVM5Noso)
 
 sink ()
 
+
+# _________________________________________
+# Analyse multivariée #
+# ----------------------------------------
+
+
+# multivariée CA vs autres
+mod1<- glm(base$siteR ~ base$grpage2 + base$type + base$statutgg2 + base$figoIII, family="binomial")
+logistic.display(mod1, decimal = 3)
+
+library(sjPlot)
+library(logistf)
+
+plot_model(mod1, show.values = TRUE, show.p = TRUE, title = "CA vs autres")
+ggsave(file = "/Users/antoinegaudetchardonnet/Documents/These/R/Résultats/mod1.pdf")
 
